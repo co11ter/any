@@ -1,4 +1,8 @@
-package visitor
+package sub_a
+
+type visitor interface {
+	VisitA(*ComponentA) string
+}
 
 type ComponentA struct {
 }
