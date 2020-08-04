@@ -1,21 +1,25 @@
 package visitor
 
-type Visitor interface {
-	VisitA() string
-	VisitB() string
+type visitor interface {
+	VisitA(*ComponentA) string
+	VisitB(*ComponentB) string
 }
 
-type Acceptor interface {
-	Accept(v Visitor) string
+type acceptor interface {
+	Accept(v visitor) string
 }
 
-type ComponentsVisitor struct {
+type ComVisitor struct {
 }
 
-func (v *ComponentsVisitor) VisitA(comA *ComponentA) string {
-	return comA.Call()
+func NewComVisitor() *ComVisitor {
+	return &ComVisitor{}
 }
 
-func (v *ComponentsVisitor) VisitB(comB *ComponentB) string {
-	return comB.Call()
+func (v *ComVisitor) VisitA(comA *ComponentA) string {
+	return "Visit: " + comA.Call()
+}
+
+func (v *ComVisitor) VisitB(comB *ComponentB) string {
+	return "Visit: " + comB.Call()
 }
