@@ -1,30 +1,25 @@
 package visitor
 
-import (
-	"github.com/co11ter/any/internal/sub_a"
-	"github.com/co11ter/any/internal/sub_b"
-)
+type Caller interface {
+	Call() string
+}
 
 type Visitor interface {
-	VisitA(*sub_a.ComponentA) string
-	VisitB(*sub_b.ComponentB) string
+	VisitA(Caller) string
+	VisitB(Caller) string
 }
 
-type acceptor interface {
-	Accept(v Visitor) string
+type visitor struct {
 }
 
-type ComVisitor struct {
-}
-
-func NewComVisitor() *ComVisitor {
-	return &ComVisitor{}
-}
-
-func (v *ComVisitor) VisitA(comA *sub_a.ComponentA) string {
+func (v *visitor) VisitA(comA Caller) string {
 	return "Visit: " + comA.Call()
 }
 
-func (v *ComVisitor) VisitB(comB *sub_b.ComponentB) string {
+func (v *visitor) VisitB(comB Caller) string {
 	return "Visit: " + comB.Call()
+}
+
+func NewVisitor() Visitor {
+	return &visitor{}
 }
