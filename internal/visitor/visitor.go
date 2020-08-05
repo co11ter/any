@@ -1,22 +1,22 @@
 package visitor
 
-type Caller interface {
+type caller interface {
 	Call() string
 }
 
 type Visitor interface {
-	VisitA(Caller) string
-	VisitB(Caller) string
+	VisitA(caller) string
+	VisitB(caller) string
 }
 
 type visitor struct {
 }
 
-func (v *visitor) VisitA(comA Caller) string {
+func (v *visitor) VisitA(comA caller) string {
 	return "Visit: " + comA.Call()
 }
 
-func (v *visitor) VisitB(comB Caller) string {
+func (v *visitor) VisitB(comB caller) string {
 	return "Visit: " + comB.Call()
 }
 
